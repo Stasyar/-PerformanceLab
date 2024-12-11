@@ -1,3 +1,5 @@
+import sys
+
 def get_numbers(file_path):
     with open(file_path, 'r') as file:
         numbers = list([int(n.strip()) for n in file.readlines()])
@@ -13,5 +15,9 @@ def main(file_path):
     return count
 
 
-print(main('numbers.txt'))
+if __name__ == "__main__":
+    print('Введите путь к файлу')
+    input_data = sys.stdin.readline().strip()
+
+    print(main(input_data))
 
