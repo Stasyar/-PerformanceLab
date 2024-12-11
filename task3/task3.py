@@ -1,4 +1,5 @@
 import json
+import sys
 
 
 def deserialization(file_path):
@@ -27,17 +28,19 @@ def recurs_search(tests_dict, values_dict):
     return tests_dict
 
 
-
-
-def main():
-    tests = deserialization('tests.json')
-    values = deserialization('values.json')
+def main(tests_file, values_file, report_file):
+    tests = deserialization(tests_file)
+    values = deserialization(values_file)
 
     report_dict = recurs_search(tests, values)
 
-    with open('report.json', 'w', encoding='utf-8') as file:
+    with open(report_file, 'w', encoding='utf-8') as file:
         json.dump(report_dict, file, indent=2)
 
 
-if __name__ == '__main__':
-    print(main())
+if __name__ == "__main__":
+    print('Введите пути к файлам через пробел (1 файл с данными о тестах, 2 файл с '
+          'данными значениях, 3 файл для записи результата')
+    input_data = sys.stdin.readline().split()
+
+    main(tests_file=input_data[0], values_file=input_data[1], report_file=input_data[2])
